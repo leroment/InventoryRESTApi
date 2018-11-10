@@ -32,7 +32,12 @@ namespace InventoryRESTApi.Services
         {
             return _context.Products.Any(p => p.Id == productId);
         }
-
+        public IEnumerable<Product> GetProducts()
+        {
+            return _context.Products
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
         public IEnumerable<Product> GetProducts(IEnumerable<Guid> productIds)
         {
             return _context.Products.Where(p => productIds.Contains(p.Id))
@@ -43,7 +48,10 @@ namespace InventoryRESTApi.Services
         {
             return _context.Products.FirstOrDefault(p => p.Id == productId);
         }
-
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
 
     }
 }

@@ -61,6 +61,11 @@ namespace InventoryRESTApi
                 });
             }
 
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Entities.Product, Models.ProductDto>();
+            });
+
             app.UseMvc();
         }
     }
